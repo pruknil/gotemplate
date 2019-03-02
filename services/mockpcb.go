@@ -3,7 +3,7 @@ package services
 import (
 	"encoding/hex"
 	"fmt"
-	"kbtg.tech/playground/interfaces"
+	"kbtg.tech/template/interfaces"
 	"strings"
 )
 

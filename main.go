@@ -3,10 +3,9 @@ package main
 import (
 	"go.uber.org/dig"
 
-	"kbtg.tech/playground/httpsvr"
-	"kbtg.tech/playground/services"
-	"kbtg.tech/playground/share"
-	"kbtg.tech/playground/socketsvr"
+	"kbtg.tech/template/httpsvr"
+	"kbtg.tech/template/services"
+	"kbtg.tech/template/share"
 	golog "log"
 	"os"
 	"os/signal"
@@ -34,19 +33,19 @@ func NewSocketService(conf *share.Config) *services.SocketService {
 		Filepath: "",
 	}
 }
-func NewSocketServer(conf *share.Config, svc *services.SocketService) *socketsvr.SocketServer {
-	return &socketsvr.SocketServer{
-		Config:        conf,
-		SocketService: svc,
-	}
-}
+//func NewSocketServer(conf *share.Config, svc *services.SocketService) *socketsvr.SocketServer {
+//	return &socketsvr.SocketServer{
+//		Config:        conf,
+//		SocketService: svc,
+//	}
+//}
 
 func BuildContainer() *dig.Container {
 	container := dig.New()
 	container.Provide(NewConfig)
 	container.Provide(NewHttpServer)
 	container.Provide(NewSocketService)
-	container.Provide(NewSocketServer)
+	//container.Provide(NewSocketServer)
 	return container
 }
 
