@@ -71,6 +71,18 @@
   version = "v1.1.2"
 
 [[projects]]
+  digest = "1:2773e4e922e5af534775962ffef08770b8114e177590f7605886528d37417105"
+  name = "go.uber.org/dig"
+  packages = [
+    ".",
+    "internal/digreflect",
+    "internal/dot",
+  ]
+  pruneopts = "UT"
+  revision = "7ff117f761a3f1b3eb521945c17a1091438eb6de"
+  version = "v1.7.0"
+
+[[projects]]
   branch = "master"
   digest = "1:76ee51c3f468493aff39dbacc401e8831fbb765104cbf613b89bef01cf4bad70"
   name = "golang.org/x/net"
@@ -107,6 +119,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/gin-gonic/gin",
+    "go.uber.org/dig",
     "golang.org/x/net/context",
   ]
   solver-name = "gps-cdcl"

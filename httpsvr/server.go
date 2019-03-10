@@ -13,14 +13,22 @@ import (
 	"time"
 )
 
+var router *gin.Engine
+
 type HttpServer struct {
 	Config  *share.Config
 	Service interfaces.IPCBService
 }
 
+func helloWorld() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Status(http.StatusOK)
+	}
+}
+
 func (server *HttpServer) Run() http.Handler {
 	gin.SetMode(gin.ReleaseMode)
-	r := gin.Default()
+	router = gin.Default()
 
 	//	urlPrefix := ""
 	//	r.GET(urlPrefix+"/version", func(c *gin.Context) {
@@ -29,12 +37,12 @@ func (server *HttpServer) Run() http.Handler {
 	//			"githash": githash,
 	//		})
 	//	})
-
-	//r.POST("/url1", server.Service.RETRCOMACCTDTLSMW(""))
+	initializeRoutes()
+	//router.GET("/hello", helloWorld())
 
 	srv := &http.Server{
 		Addr:    ":" + server.Config.HttpPort,
-		Handler: r,
+		Handler: router,
 	}
 
 	go func() {
@@ -55,5 +63,5 @@ func (server *HttpServer) Run() http.Handler {
 	}
 	defer cancel()
 
-	return r
+	return router
 }
