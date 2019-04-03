@@ -1,0 +1,79 @@
+syntax = "proto3";
+package protosvr;
+service YottaService {
+	rpc Add(CardHolder) returns (CardHolder) {}
+	rpc Query(CardHolder) returns (CardHolderResponse) {}
+	rpc Get(CardHolder) returns (CardHolder) {}
+	rpc Delete(CardHolder) returns (CardHolder) {}
+}
+
+message CardHolderResponse {
+    repeated CardHolder items = 1;
+}
+
+message CardHolder {
+
+  message BASEINFOSEG {
+    string CardNo = 1;
+    string CardType = 2;
+    string FIID = 3;
+    string Status = 4;
+
+    message ACCOUNTS {
+      string AccountProdCode = 1;
+      string AccountNo = 2;
+      string AccountBr = 3;
+      double Priority = 4;
+    }
+
+    repeated ACCOUNTS Accounts = 5;
+    string PinOffset = 6;
+    string ExpiredDate = 7;
+    string EffectiveDate = 8;
+    string LastUsed = 9;
+    string HolderName = 10;
+    int32 AccessCount = 11;
+    string BranchNo = 12;
+    int32 Period = 13;
+    double EntryFee = 14;
+  }
+
+  BASEINFOSEG BaseInfoSeg = 1;
+
+  message LIMITUSAGESEG {
+    double TodayWithdrawAmt = 1;
+    double TodayTransferAmt = 2;
+    double TodayPurchaseAmt = 3;
+    int32 TodayWithdrawCount = 4;
+    int32 TodayTransferCount = 5;
+    int32 TodayPurchaseCount = 6;
+    double MaxLimitWithdrawAmt = 7;
+    double MaxLimitTransferAmt = 8;
+    double MaxLimitPurchaseAmt = 9;
+    int32 MaxLimitWithdrawCount = 10;
+    int32 MaxLimitTransferCount = 11;
+    int32 MaxLimitPurchaseCount = 12;
+  }
+
+  LIMITUSAGESEG LimitUsageSeg = 2;
+
+  message ANNUALFEESEG {
+    string NextDueDate = 1;
+
+    message ANNUALFEEJOURNAL {
+    }
+
+    ANNUALFEEJOURNAL AnnualFeeJournal = 2;
+  }
+
+  ANNUALFEESEG AnnualFeeSeg = 3;
+  string ReplCard = 4;
+
+  message EMVSEG {
+    bool ChipFlag = 1;
+    int32 ChipATC = 2;
+  }
+
+  EMVSEG EMVSeg = 5;
+
+}
